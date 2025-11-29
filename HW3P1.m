@@ -2,7 +2,7 @@
 %%
 clear;
 clc;
-fileID = fopen('TSP_1000_randomDistance.txt','r'); %"euclidian" or "random"
+fileID = fopen('TSP_1000_euclidianDistance.txt','r'); %"euclidian" or "random"
 len = fscanf(fileID, '%d');
 fscanf(fileID, '%s %s %s', 3);
 formatSpec = '%d %d %f';
@@ -41,8 +41,10 @@ xM = full(x);
 G = graph(xM + transpose(xM));
 D = dfsearch(G, 1);
 DS = size(D, 1);
+loops = 0;
 
 while (DS < len)
+    loops = loops + 1;
     D1max = 0;
     D2max = 0;
     D11 = D(1);
